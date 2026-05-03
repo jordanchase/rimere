@@ -22,7 +22,7 @@ Rimere {
   ElseClause = "elles" ":" terminator Statement*
 
   FunctionStmt = "ritan" ident "with" ParamList? ":" terminator Statement* "end" terminator?
-  ParamList = ListOf<ident, ",">
+  ParamList = NonemptyListOf<ident, ",">
 
   ForStmt = "foran" ident "fram" Exp "to" Exp ":" terminator Statement* "end" terminator?
   WhileStmt = "hwil" Exp ":" terminator Statement* "end" terminator?
@@ -60,8 +60,10 @@ Rimere {
     | "(" Exp ")"                -- parens
 
   FunctionCall = ident "(" ArgList? ")"
-  ArgList = ListOf<Exp, ",">
-  ListExp = "[" ListOf<Exp, ",">? "]"
+  ArgList = NonemptyListOf<Exp, ",">
+
+  ListExp = "[" ListElements? "]"
+  ListElements = NonemptyListOf<Exp, ",">
 
   boolean = "soþ" | "na"
 

@@ -335,12 +335,14 @@ export default function analyze(sourceCode) {
 
     ListExp(_open, elements, _close) {
       const list = new core.ListExpression(
-        elements.children.length > 0
-          ? elements.children[0].asIteration().children.map((e) => e.rep())
-          : [],
+        elements.children.length > 0 ? elements.children[0].rep() : [],
       );
       list.type = core.listType;
       return list;
+    },
+
+    ListElements(elements) {
+      return elements.asIteration().children.map((e) => e.rep());
     },
 
     ident(_start, _parts) {

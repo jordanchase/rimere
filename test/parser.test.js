@@ -10,3 +10,41 @@ test("parses a hello world program", () => {
 test("throws an error for invalid syntax", () => {
   assert.throws(() => parse(`sprecan "missing terminator"`));
 });
+
+test("parses multiple statements", () => {
+  const match = parse(`
+    bindan x as 5;
+    sprecan x;
+  `);
+  assert.equal(match.succeeded(), true);
+});
+
+test("parses nested blocks", () => {
+  const match = parse(`
+    gif soþ:
+      gif soþ:
+        sprecan "nested";
+      end
+    end
+  `);
+  assert.equal(match.succeeded(), true);
+});
+
+test("parses multiple statements", () => {
+  const match = parse(`
+    bindan x as 5;
+    sprecan x;
+  `);
+  assert.equal(match.succeeded(), true);
+});
+
+test("parses nested blocks", () => {
+  const match = parse(`
+    gif soþ:
+      gif soþ:
+        sprecan "nested";
+      end
+    end
+  `);
+  assert.equal(match.succeeded(), true);
+});

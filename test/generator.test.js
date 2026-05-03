@@ -56,3 +56,98 @@ return (a + b);
 console.log(add(2, 3));`,
   );
 });
+
+test("generates while loop", () => {
+  const js = generate(`
+    bindan x as 1;
+    hwil x < 3:
+      sprecan x;
+    end
+  `);
+
+  assert(js.includes("while"));
+});
+
+test("generates boolean logic", () => {
+  const js = generate(`
+    bindan x as soþ;
+    bindan y as na;
+    sprecan x and y;
+  `);
+
+  assert(js.includes("&&"));
+});
+
+test("generates comparison", () => {
+  const js = generate(`
+    sprecan 5 > 3;
+  `);
+
+  assert(js.includes(">"));
+});
+
+test("generates list literals", () => {
+  assert.equal(
+    generate(`sprecan [1, 2, 3];`).trim(),
+    "console.log([1, 2, 3]);",
+  );
+});
+
+test("generates parenthesized arithmetic", () => {
+  assert.equal(
+    generate(`sprecan (1 + 2) * 3;`).trim(),
+    "console.log(((1 + 2) * 3));",
+  );
+});
+
+test("generates subtraction", () => {
+  assert.equal(generate(`sprecan 10 - 4;`).trim(), "console.log((10 - 4));");
+});
+
+test("generates division", () => {
+  assert.equal(generate(`sprecan 8 / 2;`).trim(), "console.log((8 / 2));");
+});
+
+test("generates less than comparison", () => {
+  assert.equal(generate(`sprecan 2 < 3;`).trim(), "console.log((2 < 3));");
+});
+
+test("generates equality comparison", () => {
+  assert.equal(generate(`sprecan 2 == 2;`).trim(), "console.log((2 == 2));");
+});
+
+test("generates nested conditionals", () => {
+  const js = generate(`
+    bindan x as 5;
+    gif x > 0:
+      gif x < 10:
+        sprecan "inside";
+      end
+    end
+  `);
+
+  assert(js.includes("if"));
+  assert(js.includes("inside"));
+});
+
+test("generates function with nested if", () => {
+  const js = generate(`
+    ritan check with x:
+      gif x > 0:
+        cweðan x;
+      end
+      cweðan 0;
+    end
+  `);
+
+  assert(js.includes("function check"));
+  assert(js.includes("return x"));
+  assert(js.includes("return 0"));
+});
+
+test("generates nested arithmetic precedence", () => {
+  assert.equal(
+    generate(`sprecan 1 + 2 * 3;`).trim(),
+    "console.log((1 + (2 * 3)));",
+  );
+});

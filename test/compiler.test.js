@@ -24,3 +24,46 @@ test("supports optimized output", () => {
 test("rejects unknown output types", () => {
   assert.throws(() => compile(`sprecan "hi";`, "bad"), /Unknown output type/);
 });
+
+test("compile full program", () => {
+  const result = compile(
+    `
+    bindan x as 5;
+    sprecan x;
+  `,
+    "js",
+  );
+
+  assert(result.includes("console.log"));
+});
+
+test("compile parse mode", () => {
+  const result = compile(`sprecan "hi";`, "parsed");
+  assert(result.succeeded());
+});
+
+test("compile analyzed mode with variable program", () => {
+  const result = compile(
+    `
+    bindan x as 7;
+    sprecan x;
+  `,
+    "analyzed",
+  );
+
+  assert.equal(result.statements.length, 2);
+});
+
+test("compile js mode with function program", () => {
+  const result = compile(
+    `
+    ritan id with x:
+      cweðan x;
+    end
+    sprecan id(9);
+  `,
+    "js",
+  );
+
+  assert(result.includes("function id"));
+});

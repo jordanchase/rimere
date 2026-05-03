@@ -33,8 +33,12 @@ try {
 
   if (outputType === "js") {
     console.log(output);
-  } else {
-    console.log(JSON.stringify(output, null, 2));
+  } else if (outputType === "parsed") {
+    console.log("Syntax is valid");
+  } else if (outputType === "analyzed") {
+    console.log("Program is semantically valid");
+  } else if (outputType === "optimized") {
+    console.log("Program optimized successfully");
   }
 } catch (error) {
   console.error(error.message);

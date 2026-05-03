@@ -12,7 +12,7 @@
 
 ## Authors
 
-- Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia
+- Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia Buzovo
 
 ---
 
@@ -139,6 +139,19 @@ The following checks should be performed before execution:
 - **Syntactic structure enforcement**
   Statements must follow the grammar of the language and preserve the intended narrative structure.
 
+## Static Semantics
+
+Rímere enforces the following rules:
+
+- Variables must be declared before use
+- Variables cannot be redeclared in the same scope
+- Function calls must use the correct number of arguments
+- Arithmetic operations require numbers
+- Logical operations require booleans
+- If/while conditions must be boolean
+- Break statements only allowed inside loops
+- Return statements only allowed inside functions
+
 ### Safety
 
 Rímere should aim to protect programmers from common errors through language design:
@@ -168,9 +181,11 @@ Although Rímere is an academic language and not a production system, its design
 - **No implicit access to files, system resources, or external processes unless explicitly provided**
 - **Clear boundaries between language features and host-language implementation**
 
-These measures help ensure that the language remains controlled, predictable, and appropriate for classroom use.
-
 ---
+
+## Grammar
+
+[src/rimere.ohm](src/rimere.ohm)
 
 ## Example / Comparison Programs
 

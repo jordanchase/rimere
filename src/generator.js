@@ -68,11 +68,14 @@ export default function generate(sourceCode) {
     }
 
     if (node instanceof core.Literal) {
+      if (typeof node.value === "string" && node.value === "wyrd") {
+        return JSON.stringify("Fate has spoken.");
+      }
+
       return typeof node.value === "string"
         ? JSON.stringify(node.value)
         : String(node.value);
     }
-
     throw new Error(`Cannot generate code for ${node}`);
   }
 

@@ -9,3 +9,14 @@ test("optimizer returns the analyzed program unchanged for now", () => {
 
   assert.equal(optimized, program);
 });
+
+test("optimizer handles multiple statements", () => {
+  const program = analyze(`
+    bindan x as 5;
+    bindan y as 10;
+    sprecan x + y;
+  `);
+
+  const optimized = optimize(program);
+  assert.equal(optimized, program);
+});
