@@ -10,6 +10,10 @@
   Computing for the Medieval World!
 </h2>
 
+## Authors
+
+- Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia
+
 ---
 
 ## Overview
@@ -18,9 +22,7 @@ In an age before silicon-based screens, computation was the craft of scribes, sc
 
 Rather than calling functions or executing commands, a programmer in Rímere chants instructions, binds values, and declares truths using words inspired by a time when knowledge was handwritten and computation was an art. By blending historical language with modern programming principles, Rímere invites its users to experience coding as both logic and storytelling.
 
-Rímere is not intended to be a perfectly reconstructed linguistic model of Old English. Instead, it is a **thematic programming language** that draws from Old English vocabulary and style while remaining readable, teachable, and implementable in a modern compiler project.
-
----
+## Rímere is not intended to be a perfectly reconstructed linguistic model of Old English. Instead, it is a **thematic programming language** that draws from Old English vocabulary and style while remaining readable, teachable, and implementable in a modern compiler project.
 
 ## Design Goals
 
@@ -36,53 +38,80 @@ Rímere is not intended to be a perfectly reconstructed linguistic model of Old 
 
 ### Old English-inspired syntax
 
-Rímere uses keywords and commands inspired by Old English vocabulary. For example, terms such as **bindan** (“to bind”), **sprecan** (“to speak”), **cweðan** (“to say, declare”), and **tellan** (“to count, reckon”) provide a fitting basis for assignment, output, declaration, and arithmetic-oriented operations.
+Rímere uses keywords inspired by Old English vocabulary:
+
+- **bindan** — bind a value
+- **sprecan** — speak (print/output)
+- **cweðan** — declare/return
+- **gif** — if
+- **elles** — else
+- **foran** — for loop
+- **hwil** — while loop
 
 ### Readable, narrative-style code
 
-Programs are written more like proclamations or instructions than dense symbolic expressions. The goal is for Rímere code to feel as though a scribe is recording commands, not merely typing machine directives.
+Programs resemble structured prose or instructions rather than dense symbolic expressions.
 
-### Strong thematic identity
+### Familiar programming constructs
 
-Rímere is built around a consistent medieval world concept. Naming, syntax, examples, and semantics all reinforce the idea that programming is an act of inscription, declaration, and ordering.
-
-### Familiar core programming constructs
-
-Despite its stylized presentation, Rímere still supports recognizable programming ideas such as:
+Rímere supports:
 
 - variable binding
-- expressions and evaluation
+- arithmetic expressions
 - conditionals
-- repetition
-- functions or named procedures
-- boolean truth values
-- numeric and textual data
-
-This allows users to learn and use the language without sacrificing essential computational power.
+- loops
+- functions
+- booleans, numbers, and strings
 
 ### Minimal punctuation philosophy
 
-Where possible, Rímere favors words and structure over symbol-heavy syntax. This helps the language feel older, more ceremonial, and more readable to humans.
-
-### Beginner-friendly semantics
-
-Even though the syntax is themed, the semantics are meant to stay approachable. A user should be able to infer what the code is doing from the wording and structure of the statements.
-
-### Expressive naming conventions
-
-Identifiers in Rímere can follow the aesthetic of chronicles, titles, or invocations, encouraging code that feels authored rather than assembled.
-
-### Clear separation between declaration and action
-
-One of the core stylistic goals of Rímere is distinguishing between:
-
-- declaring what is true
-- binding what is known
-- commanding what should happen
-
-That distinction gives the language a more deliberate and ceremonial feel.
+The language favors words and structure over heavy symbolic syntax.
 
 ---
+
+## Running Rímere
+
+### 1. Install dependencies
+
+Make sure you are in the project root, then run:
+
+```bash
+npm install
+```
+
+### 2. Compile a Rimere program to JavaScript
+
+```
+node src/rimere.js examples/hello.rim js
+```
+
+### 3. Run a Rimere program
+
+```
+node src/rimere.js examples/hello.rim js > out.js
+node out.js
+```
+
+### 4. Check syntax (parsing only)
+
+```
+node src/rimere.js examples/hello.rim parsed
+```
+
+### 5. Run Semantic analysis
+
+```
+node src/rimere.js examples/hello.rim analyzed
+```
+
+### 6. Run all example programs
+
+```
+node src/rimere.js examples/variables.rim js > out.js && node out.js
+node src/rimere.js examples/if.rim js > out.js && node out.js
+node src/rimere.js examples/function.rim js > out.js && node out.js
+node src/rimere.js examples/loop.rim js > out.js && node out.js
+```
 
 ## Checks
 
@@ -92,41 +121,41 @@ Rímere is designed with compile-time and runtime discipline in mind. Its checks
 
 The following checks should be performed before execution:
 
-- **Undefined name detection**  
+- **Undefined name detection**
   Variables, functions, or symbols must be declared before they are used.
 
-- **Duplicate declaration prevention**  
+- **Duplicate declaration prevention**
   The same identifier should not be declared multiple times in the same scope unless shadowing is explicitly allowed.
 
-- **Type-consistency checks**  
+- **Type-consistency checks**
   Expressions should be validated so that incompatible values are not combined incorrectly.
 
-- **Arity checking**  
+- **Arity checking**
   Invocations of procedures or functions must supply the correct number of arguments.
 
-- **Scope validation**  
+- **Scope validation**
   Names should only be accessible within valid regions of the program.
 
-- **Syntactic structure enforcement**  
+- **Syntactic structure enforcement**
   Statements must follow the grammar of the language and preserve the intended narrative structure.
 
 ### Safety
 
 Rímere should aim to protect programmers from common errors through language design:
 
-- **Explicit declarations**  
+- **Explicit declarations**
   Values should be introduced intentionally rather than appearing implicitly.
 
-- **Controlled mutation**  
+- **Controlled mutation**
   Rebinding or reassignment should be visible and deliberate.
 
-- **Predictable evaluation**  
+- **Predictable evaluation**
   Expressions should execute in a clear and consistent order.
 
-- **Readable failure messages**  
+- **Readable failure messages**
   Errors should explain what went wrong in language that matches the style of the project without becoming cryptic or overly theatrical.
 
-- **Optional immutability support**  
+- **Optional immutability support**
   Certain bindings may be treated as fixed truths once declared.
 
 ### Security
@@ -143,36 +172,109 @@ These measures help ensure that the language remains controlled, predictable, an
 
 ---
 
-## Example/Comparison Programs
+## Example / Comparison Programs
 
-Below is a conceptual comparison between modern programming style and the style Rímere aims to capture.
+Below are comparisons between modern programming languages and Rímere.
 
-### Variable Assignment
+---
 
-#### Python Vs Rimere
+### 1. Variable Assignment
+
+#### Python
 
 ```python
 x = 5
 ```
-```rimere
-bindan x as 5
+
+#### Rimere
+
 ```
-```python
+bindan x as 5;
+```
+
+### 2. Output (Printing)
+
+#### Python
+
+```
 print("Hello, world!")
 ```
-```rimere
-sprecan "Wes þu hal!"
+
+#### Rimere
+
 ```
-```python
+sprecan "hātan grētan, Rímere!";
+```
+
+### 3. Conditionals
+
+#### Python
+
+```
+x = 5
+
 if x > 10:
     print("greater")
 else:
     print("lesser or equal")
 ```
-```rimere
-gif x > 10
-    sprecan "maerra"
-elles
-    sprecan "laessan oððe gelic"
+
+#### Rimere
+
+```
+bindan x as 5;
+
+gif x > 10:
+  sprecan "greater";
+elles:
+  sprecan "lesser or equal";
+end
 ```
 
+### 4. Functions
+
+#### Python
+
+```
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(2, 3));
+```
+
+#### Rimere
+
+```
+ritan add with a, b:
+  cweðan a + b;
+end
+
+sprecan add(2, 3);
+```
+
+### 5. Loops
+
+#### Python
+
+```
+for (let i = 1; i <= 3; i++) {
+  console.log(i);
+}
+```
+
+#### Rimere
+
+```
+foran i fram 1 to 3:
+  sprecan i;
+end
+```
+
+## Testing
+
+Run the full test suite with:
+
+```bash
+npm test
+```

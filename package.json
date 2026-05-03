@@ -1,0 +1,26 @@
+{
+  "name": "rimere",
+  "version": "1.0.0",
+  "description": "Rímere: a medieval-themed programming language inspired by Old English, compiled to JavaScript.",
+  "type": "module",
+  "main": "src/rimere.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/rimere.js"
+  },
+  "author": "Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia Buzovo ",
+  "license": "MIT",
+  "keywords": [
+    "compiler",
+    "programming-language",
+    "ohm",
+    "javascript",
+    "language-design",
+    "education",
+    "old-english",
+    "rimere"
+  ],
+  "dependencies": {
+    "ohm-js": "^17.5.0"
+  }
+}

@@ -1,0 +1,6 @@
+bindan x as 5;
+gif x > 3:
+  sprecan "big";
+elles:
+  sprecan "small";
+end

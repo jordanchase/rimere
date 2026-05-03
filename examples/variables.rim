@@ -1,0 +1,3 @@
+bindan x as 5;
+bindan y as 10;
+sprecan x + y;

@@ -1,5 +1,5 @@
 Rimere {
-  Program        = spacing Statement*
+  Program = allspace Statement* allspace end
 
   Statement
     = BindingStmt
@@ -8,60 +8,94 @@ Rimere {
     | FunctionStmt
     | ReturnStmt
     | ForStmt
+    | WhileStmt
+    | BreakStmt
     | ExprStmt
 
-  BindingStmt    = "bindan" spaces ident spaces "as" spaces Exp terminator
-  SpeakStmt      = "sprecan" spaces Exp terminator
-  ReturnStmt     = "cweðan" spaces Exp terminator
-  ExprStmt       = Exp terminator
+  BindingStmt = "bindan" ident "as" Exp terminator
+  SpeakStmt = "sprecan" Exp terminator
+  ReturnStmt = "cweðan" Exp terminator
+  BreakStmt = "abrecan" terminator
+  ExprStmt = Exp terminator
 
-  IfStmt         = "gif" spaces Exp spaces ":" terminator Statement* ElseClause? "end" terminator?
-  ElseClause     = "elles" spaces ":" terminator Statement*
+  IfStmt = "gif" Exp ":" terminator Statement* ElseClause? "end" terminator?
+  ElseClause = "elles" ":" terminator Statement*
 
-  FunctionStmt   = "ritan" spaces ident spaces "with" spaces ParamList? spaces ":" terminator Statement* "end" terminator?
-  ParamList      = ListOf<ident, ",">
+  FunctionStmt = "ritan" ident "with" ParamList? ":" terminator Statement* "end" terminator?
+  ParamList = ListOf<ident, ",">
 
-  ForStmt        = "foran" spaces ident spaces "fram" spaces Exp spaces "to" spaces Exp spaces ":" terminator Statement* "end" terminator?
+  ForStmt = "foran" ident "fram" Exp "to" Exp ":" terminator Statement* "end" terminator?
+  WhileStmt = "hwil" Exp ":" terminator Statement* "end" terminator?
 
-  Exp            = LogicExp
+  Exp = LogicExp
 
-  LogicExp       = CompareExp
-                 | LogicExp spaces "and" spaces CompareExp  -- and
-                 | LogicExp spaces "or" spaces CompareExp   -- or
+  LogicExp
+    = LogicExp "or" CompareExp   -- or
+    | LogicExp "and" CompareExp  -- and
+    | CompareExp
 
-  CompareExp     = AddExp
-                 | AddExp spaces CompOp spaces AddExp       -- compare
+  CompareExp
+    = AddExp CompOp AddExp       -- compare
+    | AddExp
 
-  CompOp         = "==" | "!=" | ">=" | "<=" | ">" | "<"
+  CompOp = "==" | "!=" | ">=" | "<=" | ">" | "<"
 
-  AddExp         = AddExp spaces "+" spaces MulExp          -- plus
-                 | AddExp spaces "-" spaces MulExp          -- minus
-                 | MulExp
+  AddExp
+    = AddExp "+" MulExp          -- plus
+    | AddExp "-" MulExp          -- minus
+    | MulExp
 
-  MulExp         = MulExp spaces "*" spaces PriExp          -- times
-                 | MulExp spaces "/" spaces PriExp          -- divide
-                 | PriExp
+  MulExp
+    = MulExp "*" PriExp          -- times
+    | MulExp "/" PriExp          -- divide
+    | PriExp
 
-  PriExp         = number
-                 | string
-                 | boolean
-                 | FunctionCall
-                 | ident
-                 | "(" spaces Exp spaces ")"
+  PriExp
+    = number                     -- number
+    | string                     -- string
+    | boolean                    -- boolean
+    | ListExp                    -- list
+    | FunctionCall               -- call
+    | ident                      -- variable
+    | "(" Exp ")"                -- parens
 
-  FunctionCall   = ident "(" spaces ArgList? spaces ")"
-  ArgList        = ListOf<Exp, ",">
+  FunctionCall = ident "(" ArgList? ")"
+  ArgList = ListOf<Exp, ",">
+  ListExp = "[" ListOf<Exp, ",">? "]"
 
-  boolean        = "soþ" | "na"
+  boolean = "soþ" | "na"
 
-  ident          = identStart identPart*
-  identStart     = letter | "_"
-  identPart      = letter | digit | "_"
+  ident = ~keyword (letter | "_") (letter | digit | "_")*
 
-  number         = digit+ ("." digit+)?
-  string         = "\"" stringChar* "\""
-  stringChar     = ~"\"" any
+  keyword
+    = "bindan"
+    | "sprecan"
+    | "cweðan"
+    | "gif"
+    | "elles"
+    | "ritan"
+    | "with"
+    | "foran"
+    | "fram"
+    | "to"
+    | "hwil"
+    | "abrecan"
+    | "end"
+    | "and"
+    | "or"
+    | "as"
+    | "soþ"
+    | "na"
 
-  terminator     = spaces (";" | "\n")+ spaces
-  spaces         = (" " | "\t" | "\n")*
+  number = digit+ ("." digit+)?
+  string = "\"" (~"\"" ~"\n" any)* "\""
+
+  terminator = (";" | newline)+
+
+  allspace = (space | newline)*
+
+  newline = "\n"
+
+  space := " " | "\t" | "\r" | comment
+  comment = "#" (~"\n" any)*
 }
