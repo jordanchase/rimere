@@ -22,7 +22,7 @@ In an age before silicon-based screens, computation was the craft of scribes, sc
 
 Rather than calling functions or executing commands, a programmer in Rímere chants instructions, binds values, and declares truths using words inspired by a time when knowledge was handwritten and computation was an art. By blending historical language with modern programming principles, Rímere invites its users to experience coding as both logic and storytelling.
 
-## Rímere is not intended to be a perfectly reconstructed linguistic model of Old English. Instead, it is a **thematic programming language** that draws from Old English vocabulary and style while remaining readable, teachable, and implementable in a modern compiler project.
+Rímere is not intended to be a perfectly reconstructed linguistic model of Old English. Instead, it is a **thematic programming language** that draws from Old English vocabulary and style while remaining readable, teachable, and implementable in a modern compiler project.
 
 ## Design Goals
 
