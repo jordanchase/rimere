@@ -139,7 +139,7 @@ The following checks should be performed before execution:
 - **Syntactic structure enforcement**
   Statements must follow the grammar of the language and preserve the intended narrative structure.
 
-## Static Semantics
+### Static Semantics
 
 Rímere enforces the following rules:
 
