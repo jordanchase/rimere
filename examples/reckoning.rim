@@ -1,0 +1,23 @@
+ritan square with n:
+  cweðan n * n;
+end
+
+ritan describe with n:
+  gif n > 10:
+    sprecan "large square";
+  elles:
+    sprecan "small square";
+  end
+
+  cweðan n;
+end
+
+sprecan "Beginning the reckoning...";
+
+foran i fram 1 to 5:
+  bindan result as square(i);
+  sprecan result;
+  describe(result);
+end
+
+sprecan "wyrd";

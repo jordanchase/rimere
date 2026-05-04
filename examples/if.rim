@@ -1,6 +1,7 @@
 bindan x as 5;
 gif x > 3:
-  sprecan "big";
+  sprecan "māra";
 elles:
-  sprecan "small";
+  sprecan "læs";
 end
+

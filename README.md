@@ -12,7 +12,7 @@
 
 ## Authors
 
-- Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia Buzovo
+- Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney-Miller, Ray Clemons, Temi Iredale, Anastasia Bozova
 
 ---
 
