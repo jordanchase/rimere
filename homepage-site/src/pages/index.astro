@@ -82,11 +82,13 @@ const developers = [
   {
     initials: "JC",
     name: "Jordan Chase",
+    photo: "/jordanphoto.png",
     bio: "to be added!",
   },
   {
     initials: "ML",
     name: "Marleena Limbrick",
+    photo: "/marleenaphoto.png",
     bio: "to be added!",
   },
   {
@@ -97,6 +99,7 @@ const developers = [
   {
     initials: "AW",
     name: "Audrey Whitney-Miller",
+    photo: "/audreyphoto.jpeg",
     bio: "to be added!",
   },
   {
@@ -231,7 +234,13 @@ const featureSections = [
           <div class="developer-list">
             {developers.map((developer) => (
               <article class="developer-row">
-                <div class="developer-mark">{developer.initials}</div>
+                <div class="developer-mark">
+                  {developer.photo ? (
+                    <img src={developer.photo} alt={developer.name} />
+                  ) : (
+                    developer.initials
+                  )}
+                </div>
                 <div class="developer-copy">
                   <h3>{developer.name}</h3>
                   <p>{developer.bio}</p>
