@@ -1,4 +1,4 @@
-# lmu-cmsi-3802-homework1
+# rimere
 
 <p align="center">
   <img src="docs/RímereLogo.png" width="220">
