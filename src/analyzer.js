@@ -361,13 +361,13 @@ export default function analyze(sourceCode) {
       return new core.Literal(this.sourceString === "soþ", core.booleanType);
     },
 
-    _terminal() {
-      return this.sourceString;
-    },
+    // _terminal() {
+    //   return this.sourceString;
+    // },
 
-    _iter(...children) {
-      return children.map((child) => child.rep());
-    },
+    // _iter(...children) {
+    //   return children.map((child) => child.rep());
+    // },
   });
 
   return analyzer(match).rep();

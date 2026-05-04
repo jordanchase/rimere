@@ -80,6 +80,8 @@ test("boolean logic works", () => {
   `);
 });
 
+
+
 test("rejects arithmetic with booleans", () => {
   assert.throws(() => analyze(`sprecan soþ + 1;`), /Expected a number/);
 });
@@ -205,4 +207,22 @@ test("rejects duplicate parameter names", () => {
   `),
     /already declared/,
   );
+});
+
+test("allows complex logical expressions", () => {
+  analyze(`
+    bindan a as soþ;
+    bindan b as na;
+    sprecan a or b;
+    sprecan a and b;
+  `);
+});
+
+test("allows empty and nonempty lists", () => {
+  analyze(`
+    bindan empty as [];
+    bindan filled as [1, 2, 3];
+    sprecan empty;
+    sprecan filled;
+  `);
 });

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import generate from "../src/generator.js";
+import generate, { gen } from "../src/generator.js";
 
 test("generates JavaScript for hello world", () => {
   assert.equal(
@@ -12,11 +12,13 @@ test("generates JavaScript for hello world", () => {
 test("generates JavaScript for variables and arithmetic", () => {
   assert.equal(
     generate(`
+      2;
       bindan x as 5;
       bindan y as 10;
       sprecan x + y;
     `).trim(),
-    `let x = 5;
+    `2;
+let x = 5;
 let y = 10;
 console.log((x + y));`,
   );
@@ -73,9 +75,11 @@ test("generates boolean logic", () => {
     bindan x as soþ;
     bindan y as na;
     sprecan x and y;
+    sprecan x or y;
   `);
 
   assert(js.includes("&&"));
+  assert(js.includes("||"));
 });
 
 test("generates comparison", () => {
@@ -167,4 +171,8 @@ test("generates break inside loops", () => {
   `);
 
   assert(js.includes("break;"));
+});
+
+test("generator errors on unknown node type", () => {
+  assert.throws(() => gen({ }), /Cannot generate code for/);
 });
