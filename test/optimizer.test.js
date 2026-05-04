@@ -20,3 +20,25 @@ test("optimizer handles multiple statements", () => {
   const optimized = optimize(program);
   assert.equal(optimized, program);
 });
+
+test("optimizer preserves nested programs", () => {
+  const program = analyze(`
+    ritan f with x:
+      gif x > 0:
+        cweðan x;
+      end
+      cweðan 0;
+    end
+    sprecan f(2);
+  `);
+
+  const optimized = optimize(program);
+  assert.equal(optimized, program);
+});
+
+test("optimizer handles empty programs", () => {
+  const program = analyze(``);
+  const optimized = optimize(program);
+
+  assert.equal(optimized, program);
+});

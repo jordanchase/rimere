@@ -30,6 +30,25 @@ test("parses nested blocks", () => {
   assert.equal(match.succeeded(), true);
 });
 
+test("parses comments and blank lines", () => {
+  const match = parse(`
+    # a heading
+    bindan x as 5;
+    sprecan x; # speak the value
+  `);
+  assert.equal(match.succeeded(), true);
+});
+
+test("parses zero-argument functions and list literals", () => {
+  const match = parse(`
+    ritan gather with:
+      cweðan [1, 2, 3];
+    end
+    sprecan gather();
+  `);
+  assert.equal(match.succeeded(), true);
+});
+
 test("parses multiple statements", () => {
   const match = parse(`
     bindan x as 5;

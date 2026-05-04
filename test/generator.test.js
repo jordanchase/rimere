@@ -151,3 +151,20 @@ test("generates nested arithmetic precedence", () => {
     "console.log((1 + (2 * 3)));",
   );
 });
+
+test("generates special output for wyrd", () => {
+  assert.equal(
+    generate(`sprecan "wyrd";`).trim(),
+    `console.log("Fate has spoken.");`,
+  );
+});
+
+test("generates break inside loops", () => {
+  const js = generate(`
+    foran i fram 1 to 3:
+      abrecan;
+    end
+  `);
+
+  assert(js.includes("break;"));
+});

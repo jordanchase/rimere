@@ -185,3 +185,24 @@ test("rejects calling a variable like a function", () => {
     /is not a function/,
   );
 });
+
+test("allows zero-argument functions", () => {
+  analyze(`
+    ritan bell with:
+      cweðan 1;
+    end
+    sprecan bell();
+  `);
+});
+
+test("rejects duplicate parameter names", () => {
+  assert.throws(
+    () =>
+      analyze(`
+    ritan f with x, x:
+      cweðan x;
+    end
+  `),
+    /already declared/,
+  );
+});

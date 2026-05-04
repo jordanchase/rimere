@@ -67,3 +67,12 @@ test("compile js mode with function program", () => {
 
   assert(result.includes("function id"));
 });
+
+test("compile js mode preserves wyrd special output", () => {
+  const result = compile(`sprecan "wyrd";`, "js");
+  assert.equal(result.trim(), `console.log("Fate has spoken.");`);
+});
+
+test("compile analyzed mode propagates semantic errors", () => {
+  assert.throws(() => compile(`sprecan x;`, "analyzed"), /has not been declared/);
+});
