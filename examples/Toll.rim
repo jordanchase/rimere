@@ -1,0 +1,23 @@
+# The Toll of the Old Bridge
+
+# Bind the main values for the traveler, coins, and required toll.
+bindan traveler = "Rowan"
+bindan coin = 8
+bindan toll = 5
+
+# Start the scene
+sprecan traveler + " comes upon the old stone bridge."
+
+# Check if the travel has the required amount of coins
+gif coin >= toll do
+    # As traveler pays they lose their coins
+    sprecan "The gatekeeper nods and lowers the chain."
+    bindan coin = coin - toll
+
+    # Show the result after crossing the bridge.
+    sprecan traveler + " crosses the bridge with " + coin + " coins remaining."
+elles
+    # If the traveler cannot pay, they are denied passage.
+    sprecan "The gatekeeper bars the way."
+    sprecan traveler + " must seek another road."
+end
