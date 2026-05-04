@@ -293,3 +293,11 @@ Run the full test suite with:
 ```bash
 npm test
 ```
+
+## Link to Slides
+
+[Slides!](https://canva.link/rimere)
+
+## Link to Website
+
+[Website](https://jordanchase.github.io/lmu-cmsi-3802-homework1/#developers)
