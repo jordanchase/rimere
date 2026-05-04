@@ -41,9 +41,9 @@ body {
 
 .crest-row {
   display: grid;
-  grid-template-columns: 1fr 240px 1fr;
+  grid-template-columns: minmax(0, 1.5fr) 240px minmax(0, 1.5fr);
   align-items: center;
-  gap: 28px;
+  gap: 4px;
   margin-bottom: 18px;
 }
 
@@ -64,45 +64,19 @@ body {
   height: auto;
 }
 
-.flourish {
-  position: relative;
+.flourish-image {
+  width: 100%;
+  max-height: 210px;
+  object-fit: contain;
   display: block;
-  height: 44px;
 }
 
-.flourish::before {
-  content: "";
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  top: 18px;
-  border-top: 3px solid var(--border);
-  border-radius: 999px;
+.flourish-image-left {
+  justify-self: end;
 }
 
-.flourish::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  width: 34px;
-  height: 34px;
-  border: 3px solid var(--border);
-  border-radius: 50%;
-  background: transparent;
-}
-
-.flourish.left::after {
-  left: 0;
-  border-right-color: transparent;
-  border-top-color: transparent;
-  transform: rotate(18deg);
-}
-
-.flourish.right::after {
-  right: 0;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-  transform: rotate(18deg);
+.flourish-image-right {
+  justify-self: start;
 }
 
 h1,
@@ -389,7 +363,7 @@ li + li {
     gap: 18px;
   }
 
-  .flourish {
+  .flourish-image {
     display: none;
   }
 
