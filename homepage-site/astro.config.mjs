@@ -6,3 +6,4 @@ export default defineConfig({
     site: 'https://jordanchase.github.io/rimere/',
     base: '/rimere>',
 });
+
