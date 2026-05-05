@@ -24,31 +24,26 @@ const overview = [
 
 const examples = [
   {
-    title: "Variables and Speech",
-    file: "variables.rim",
-    detail: "Bindings, arithmetic, strings, and `sprecan`.",
-    code: `bindan x as 5;
-bindan y as 10;
-sprecan x + y;
-sprecan "hātan grētan, Rímere!";`,
+    title: "hello.rim",
+    code: `sprecan "hātan grētan, Rímere!";`,
   },
   {
-    title: "Conditionals and Logic",
-    file: "if.rim",
-    detail: "Booleans, comparison, `gif`, `elles`, `and`, and `or`.",
-    code: `bindan score as 7;
-bindan blessed as soþ;
-bindan feast as na;
-gif blessed and (score >= 7 or feast):
-  sprecan "the gate opens";
+    title: "variables.rim",
+    code: `bindan x as 5;
+bindan y as 10;
+sprecan x + y;`,
+  },
+  {
+    title: "if.rim",
+    code: `bindan x as 5;
+gif x > 3:
+  sprecan "big";
 elles:
-  sprecan "wait by the wall";
+  sprecan "small";
 end`,
   },
   {
-    title: "Functions and Return",
-    file: "function.rim",
-    detail: "Function declarations, parameters, calls, and `cweðan`.",
+    title: "function.rim",
     code: `ritan add with a, b:
   cweðan a + b;
 end
@@ -56,26 +51,14 @@ end
 sprecan add(2, 3);`,
   },
   {
-    title: "For Loops and Break",
-    file: "loop.rim",
-    detail: "Range iteration with `foran` and an early `abrecan`.",
-    code: `foran i fram 1 to 5:
-  gif i == 4:
-    abrecan;
-  end
+    title: "loop.rim",
+    code: `foran i fram 1 to 3:
   sprecan i;
 end`,
   },
   {
-    title: "While Loops and Lists",
-    file: "wyrd.rim",
-    detail: "A boolean loop condition, a list literal, and the special `wyrd` output.",
-    code: `hwil 1 < 2:
-  sprecan [1, 2, 3];
-  abrecan;
-end
-
-sprecan "wyrd";`,
+    title: "wyrd.rim",
+    code: `sprecan "wyrd";`,
   },
 ];
 
@@ -122,21 +105,21 @@ const developers = [
 
 const featureGroups = [
   {
-    title: "Keywords",
+    title: "Design Goals",
     items: [
-      "bindan binds a value",
-      "sprecan prints a result",
-      "cweðan returns from a function",
-      "gif and elles form a conditional",
-      "foran and hwil form loops",
+      "Create a programming language with a distinctive medieval identity",
+      "Make syntax feel literary and narrative rather than purely mechanical",
+      "Preserve core programming concepts in a form that is still understandable to modern users",
+      "Balance novelty with usability so the language is fun to write and feasible to implement",
+      "Explore how theme and syntax can shape the programmer’s experience",
     ],
   },
   {
-    title: "Core Features",
+    title: "Features",
     items: [
       "Readable, narrative-style code",
       "Variable binding, arithmetic expressions, conditionals, loops, and functions",
-      "Booleans, numbers, strings, and list literals",
+      "Booleans, numbers, and strings",
       "A minimal punctuation philosophy",
     ],
   },
@@ -199,10 +182,6 @@ const featureGroups = [
 
           <p class="hero-kicker">Computing for the Medieval World</p>
           <h1>Rímere</h1>
-          <p class="hero-copy">
-            A thematic programming language that turns compiler construction
-            into something closer to a manuscript than a machine panel.
-          </p>
 
           <nav class="nav-row" aria-label="Primary">
             {navLinks.map((link) => (
@@ -221,19 +200,19 @@ const featureGroups = [
       <section class="sheet content-section" id="story">
         <div class="section-heading">
           <p class="eyebrow">Overview</p>
-          <h2>The Language Story</h2>
+          <h2>Overview</h2>
         </div>
         <div class="story-grid">
           <div class="story-copy">
             {overview.map((paragraph) => <p>{paragraph}</p>)}
           </div>
           <aside class="story-panel">
-            <h3>At a Glance</h3>
+            <h3>Design Goals</h3>
             <ul>
-              <li>Old English-inspired vocabulary</li>
-              <li>Compiled to JavaScript</li>
-              <li>Designed for readability and theme</li>
-              <li>Backed by parser, analyzer, optimizer, and generator stages</li>
+              <li>Create a programming language with a distinctive medieval identity</li>
+              <li>Make syntax feel literary and narrative rather than purely mechanical</li>
+              <li>Preserve core programming concepts in a form that is still understandable to modern users</li>
+              <li>Balance novelty with usability so the language is fun to write and feasible to implement</li>
             </ul>
             <a class="repo-button" href={repoUrl} target="_blank" rel="noreferrer">
               View the Compiler Repo
@@ -245,16 +224,14 @@ const featureGroups = [
       <section class="sheet content-section" id="examples">
         <div class="section-heading">
           <p class="eyebrow">Examples</p>
-          <h2>Sample Programs</h2>
+          <h2>Example Programs</h2>
         </div>
         <div class="example-grid">
           {examples.map((example) => (
             <article class="example-card">
               <div class="card-heading">
                 <h3>{example.title}</h3>
-                <p class="card-subtitle">{example.file}</p>
               </div>
-              <p class="card-detail">{example.detail}</p>
               <pre><code>{example.code}</code></pre>
             </article>
           ))}
@@ -264,7 +241,7 @@ const featureGroups = [
       <section class="sheet content-section" id="developers">
         <div class="section-heading">
           <p class="eyebrow">Developers</p>
-          <h2>The Authors Behind Rímere</h2>
+          <h2>Authors</h2>
         </div>
         <div class="developer-layout">
           <div class="developer-list">
@@ -288,7 +265,7 @@ const featureGroups = [
           <aside class="features-panel">
             <div class="section-heading section-heading-compact">
               <p class="eyebrow">Reference</p>
-              <h2>Language Notes</h2>
+              <h2>Features</h2>
             </div>
             <div class="feature-sections">
               {featureGroups.map((group) => (

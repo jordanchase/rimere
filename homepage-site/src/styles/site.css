@@ -34,14 +34,13 @@ body {
 }
 
 .sheet {
-  background: var(--paper);
-  box-shadow: 0 20px 40px var(--shadow);
-  backdrop-filter: blur(1px);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .hero-shell,
 .content-section {
-  border-radius: 28px;
   padding: 28px;
 }
 
