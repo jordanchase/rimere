@@ -281,5 +281,136 @@ const featureGroups = [
         </div>
       </section>
     </main>
+
+    <audio
+      id="rimere-bg-audio"
+      src={asset("backgroundmusic.mp3")}
+      preload="auto"
+      playsinline
+      loop
+    ></audio>
+    <button
+      id="rimere-audio-toggle"
+      class="audio-toggle"
+      type="button"
+      aria-label="Toggle background music mute"
+      aria-pressed="false"
+    >
+      Mute
+    </button>
+
+    <script is:inline>
+      (() => {
+        const STORAGE_KEY = "rimere:bg-audio-muted";
+        const audio = document.getElementById("rimere-bg-audio");
+        const toggle = document.getElementById("rimere-audio-toggle");
+
+        if (!(audio instanceof HTMLAudioElement) || !(toggle instanceof HTMLButtonElement)) return;
+
+        let storedMuted = null;
+        try {
+          storedMuted = localStorage.getItem(STORAGE_KEY);
+        } catch {
+          storedMuted = null;
+        }
+        let muted = storedMuted === null ? false : storedMuted === "true";
+
+        audio.volume = 0.35;
+        audio.muted = muted;
+
+        let started = !audio.paused;
+
+        const syncToggle = () => {
+          started = started || !audio.paused;
+          toggle.textContent = started ? (muted ? "Unmute" : "Mute") : "Play";
+          toggle.setAttribute("aria-pressed", started ? String(muted) : "false");
+          toggle.setAttribute(
+            "aria-label",
+            started ? "Toggle background music mute" : "Play background music"
+          );
+        };
+
+        const tryPlay = () => {
+          try {
+            const playResult = audio.play();
+            if (playResult && typeof playResult.then === "function") {
+              return playResult.then(
+                () => {
+                  started = true;
+                  syncToggle();
+                  return true;
+                },
+                () => false
+              );
+            }
+            started = true;
+            syncToggle();
+            return Promise.resolve(true);
+          } catch {
+            return Promise.resolve(false);
+          }
+        };
+
+        const ensurePlaying = () => (audio.paused ? tryPlay() : Promise.resolve(true));
+
+        syncToggle();
+
+        audio.addEventListener("playing", () => {
+          started = true;
+          syncToggle();
+        });
+        audio.addEventListener("pause", () => {
+          syncToggle();
+        });
+
+        let waitingForGesture = false;
+        const armGesturePlayback = () => {
+          if (waitingForGesture) return;
+          waitingForGesture = true;
+
+          const onGesture = () => {
+            waitingForGesture = false;
+            // Call play() synchronously inside the gesture handler for maximum browser compatibility.
+            void tryPlay();
+          };
+
+          document.addEventListener("click", onGesture, { capture: true, once: true });
+          document.addEventListener("touchend", onGesture, { capture: true, once: true, passive: true });
+          document.addEventListener("pointerup", onGesture, { capture: true, once: true });
+          document.addEventListener("mouseup", onGesture, { capture: true, once: true });
+          document.addEventListener("mousedown", onGesture, { capture: true, once: true });
+          document.addEventListener("keydown", onGesture, { capture: true, once: true });
+        };
+
+        // Attempt to start playback immediately; if blocked by autoplay policies, wait for first user gesture.
+        ensurePlaying().then((started) => {
+          if (!started) armGesturePlayback();
+          syncToggle();
+        });
+
+        toggle.addEventListener("click", async () => {
+          if (audio.paused) {
+            const startedNow = await ensurePlaying();
+            if (!startedNow) armGesturePlayback();
+            syncToggle();
+            return;
+          }
+
+          muted = !muted;
+          try {
+            localStorage.setItem(STORAGE_KEY, String(muted));
+          } catch {
+            // Ignore storage failures (e.g., private browsing restrictions).
+          }
+          audio.muted = muted;
+          syncToggle();
+
+          if (!muted) {
+            const started = await ensurePlaying();
+            if (!started) armGesturePlayback();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
