@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="docs/RímereLogo.png" width="220">
 </p>
