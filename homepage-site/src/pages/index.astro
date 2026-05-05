@@ -82,13 +82,13 @@ const developers = [
   {
     initials: "JC",
     name: "Jordan Chase",
-    photo: "jordanphoto.png",
+    photo: `${import.meta.env.BASE_URL}jordanphoto.png`,
     bio: "Loyola Marymount University '27",
   },
   {
     initials: "ML",
     name: "Marleena Limbrick",
-    photo: "marleenaphoto.png",
+    photo: `${import.meta.env.BASE_URL}marleenaphoto.png`,
     bio: "Loyola Marymount University '27",
   },
   {
@@ -99,7 +99,7 @@ const developers = [
   {
     initials: "AW",
     name: "Audrey Whitney-Miller",
-    photo: "audreyphoto.jpeg",
+    photo: `${import.meta.env.BASE_URL}audreyphoto.jpeg`,
     bio: "Loyola Marymount University '27",
   },
   {
@@ -154,72 +154,123 @@ const featureSections = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Rímere is a thematic programming language inspired by Old English vocabulary and compiler design."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&display=swap"
+      rel="stylesheet"
+    />
     <title>Rímere</title>
   </head>
-
   <body>
     <main class="sheet">
+      <header class="masthead" id="top">
+        <div class="crest-row">
+          <img
+            class="flourish-image flourish-image-left"
+            src={`${import.meta.env.BASE_URL}left.png`}
+            alt=""
+            aria-hidden="true"
+            style="width: 50%; max-height: 105px;"
+          />
+          <div class="logo-box">
+            <img src={`${import.meta.env.BASE_URL}rimere-logo.png`} alt="Rímere logo" />
+          </div>
+          <img
+            class="flourish-image flourish-image-right"
+            src={`${import.meta.env.BASE_URL}right.png`}
+            alt=""
+            aria-hidden="true"
+            style="width: 50%; max-height: 105px;"
+          />
+        </div>
 
-      <!-- HEADER -->
-      <header class="masthead">
-        <img src={`${import.meta.env.BASE_URL}rimere-logo.png`} alt="Rímere logo" />
         <h1>Rímere</h1>
         <p class="tagline">Computing for the Medieval World!</p>
+
+        <nav class="nav-row" aria-label="Primary">
+          {navGroups.map((group, index) => (
+            <div class={`nav-group ${index === 1 ? "nav-group-right" : ""}`}>
+              {group.map((link) => (
+                <a
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          ))}
+        </nav>
       </header>
 
-      <!-- OVERVIEW -->
-      <section>
+      <section class="section story-section" id="story">
         <h2>Overview</h2>
-        {overview.map(p => <p>{p}</p>)}
+        <div class="overview-copy">
+          {overview.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
       </section>
 
-      <!-- EXAMPLES -->
-      <section>
+      <section class="section" id="examples">
         <h2>Example Programs</h2>
-        {examples.map(e => (
-          <div>
-            <h3>{e.title}</h3>
-            <pre>{e.code}</pre>
-          </div>
-        ))}
+        <div class="example-grid">
+          {examples.map((example) => (
+            <article class="example-card">
+              <h3>{example.title}</h3>
+              <pre><code>{example.code}</code></pre>
+              <div class="example-meta">
+                <p><span>Covers</span>{example.covers}</p>
+                <p><span>Checks</span>{example.checks}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <!-- DEVELOPERS -->
-      <section>
-        <h2>Developers</h2>
-        {developers.map(dev => (
-          <div class="developer-row">
-            <div class="developer-mark">
-              {dev.photo ? (
-                <img
-                  src={`${import.meta.env.BASE_URL}${dev.photo}`}
-                  alt={dev.name}
-                />
-              ) : (
-                dev.initials
-              )}
-            </div>
-            <div>
-              <h3>{dev.name}</h3>
-              <p>{dev.bio}</p>
-            </div>
+      <section class="section lower-section" id="developers">
+        <div class="developer-column">
+          <h2>Developers</h2>
+          <div class="developer-list">
+            {developers.map((developer) => (
+              <article class="developer-row">
+                <div class="developer-mark">
+                  {developer.photo ? (
+                    <img src={developer.photo} alt={developer.name} />
+                  ) : (
+                    developer.initials
+                  )}
+                </div>
+                <div class="developer-copy">
+                  <h3>{developer.name}</h3>
+                  <p>{developer.bio}</p>
+                </div>
+              </article>
+            ))}
           </div>
-        ))}
-      </section>
+        </div>
 
-      <!-- FEATURES -->
-      <section>
-        <h2>Features</h2>
-        {featureSections.map(section => (
-          <div>
-            <h3>{section.title}</h3>
-            <ul>
-              {section.items.map(i => <li>{i}</li>)}
-            </ul>
+        <aside class="features-panel">
+          <h2>Features</h2>
+          <div class="feature-sections">
+            {featureSections.map((section) => (
+              <section class="feature-block">
+                <h3>{section.title}</h3>
+                <ul>
+                  {section.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+            ))}
           </div>
-        ))}
+        </aside>
       </section>
-
     </main>
   </body>
 </html>
