@@ -9,6 +9,13 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
 
 const asset = (path) => `${baseUrl}${String(path).replace(/^\/+/, "")}`;
 
+const navLinks = [
+  { href: "#story", label: "Story" },
+  { href: "#examples", label: "Examples" },
+  { href: "#developers", label: "Developers" },
+  { href: repoUrl, label: "Repo", external: true },
+];
+
 const overview = [
   "In an age before silicon-based screens, computation was the craft of scribes, scholars, and quiet thinkers. These were the people who transformed symbols into meaning. Rímere reimagines programming as it might have existed in that world: a language shaped not by modern syntax, but by the cadence and vocabulary of Old English.",
   "Rather than calling functions or executing commands, a programmer in Rímere chants instructions, binds values, and declares truths using words inspired by a time when knowledge was handwritten and computation was an art. By blending historical language with modern programming principles, Rímere invites its users to experience coding as both logic and storytelling.",
@@ -17,14 +24,18 @@ const overview = [
 
 const examples = [
   {
-    title: "Variables",
+    title: "Variables and Speech",
+    file: "variables.rim",
+    detail: "Bindings, arithmetic, strings, and `sprecan`.",
     code: `bindan x as 5;
 bindan y as 10;
-sprecan (x + y) * 2;
+sprecan x + y;
 sprecan "hātan grētan, Rímere!";`,
   },
   {
-    title: "Logic",
+    title: "Conditionals and Logic",
+    file: "if.rim",
+    detail: "Booleans, comparison, `gif`, `elles`, `and`, and `or`.",
     code: `bindan score as 7;
 bindan blessed as soþ;
 bindan feast as na;
@@ -34,19 +45,112 @@ elles:
   sprecan "wait by the wall";
 end`,
   },
+  {
+    title: "Functions and Return",
+    file: "function.rim",
+    detail: "Function declarations, parameters, calls, and `cweðan`.",
+    code: `ritan add with a, b:
+  cweðan a + b;
+end
+
+sprecan add(2, 3);`,
+  },
+  {
+    title: "For Loops and Break",
+    file: "loop.rim",
+    detail: "Range iteration with `foran` and an early `abrecan`.",
+    code: `foran i fram 1 to 5:
+  gif i == 4:
+    abrecan;
+  end
+  sprecan i;
+end`,
+  },
+  {
+    title: "While Loops and Lists",
+    file: "wyrd.rim",
+    detail: "A boolean loop condition, a list literal, and the special `wyrd` output.",
+    code: `hwil 1 < 2:
+  sprecan [1, 2, 3];
+  abrecan;
+end
+
+sprecan "wyrd";`,
+  },
 ];
 
 const developers = [
-  { initials: "JC", name: "Jordan Chase", photo: "jordanphoto.png", bio: "LMU '27" },
-  { initials: "AW", name: "Audrey Whitney-Miller", photo: "audreyphoto.jpeg", bio: "LMU '27" },
+  {
+    initials: "JC",
+    name: "Jordan Chase",
+    photo: "jordanphoto.png",
+    bio: "Computer Science @ Loyola Marymount University '27",
+  },
+  {
+    initials: "ML",
+    name: "Marleena Limbrick",
+    photo: "marleenaphoto.png",
+    bio: "Marleena is a third year computer science student who loves Medieval Times and the Ren Faire",
+  },
+  {
+    initials: "VA",
+    name: "Vicente Anyaegbu",
+    bio: "Computer Science @ Loyola Marymount University '27",
+  },
+  {
+    initials: "AW",
+    name: "Audrey Whitney-Miller",
+    photo: "audreyphoto.jpeg",
+    bio:"Audrey is a computer science student who enjoys web development and her favorite show is BBC Merlin.",
+  },
+  {
+    initials: "R",
+    name: "Ray",
+    bio: "Computer Science @ Loyola Marymount University '27",
+  },
+  {
+    initials: "T",
+    name: "Temi",
+    bio: "Computer Science @ Loyola Marymount University '27",
+  },
+  {
+    initials: "AB",
+    name: "Anastasia Buzovo",
+    bio: "Computer Science @ Loyola Marymount University '27",
+  },
 ];
 
-const featureSections = [
+const featureGroups = [
   {
-    title: "Features",
+    title: "Keywords",
     items: [
-      "Readable narrative-style code",
-      "Variables, loops, conditionals, functions",
+      "bindan binds a value",
+      "sprecan prints a result",
+      "cweðan returns from a function",
+      "gif and elles form a conditional",
+      "foran and hwil form loops",
+    ],
+  },
+  {
+    title: "Core Features",
+    items: [
+      "Readable, narrative-style code",
+      "Variable binding, arithmetic expressions, conditionals, loops, and functions",
+      "Booleans, numbers, strings, and list literals",
+      "A minimal punctuation philosophy",
+    ],
+  },
+  {
+    title: "Static Semantics",
+    items: [
+      "Variables must be declared before use",
+      "Variables cannot be redeclared in the same scope",
+      "Function calls must use the correct number of arguments",
+      "Arithmetic operations require numbers",
+      "Logical operations require booleans",
+      "If and while conditions must be boolean",
+      "Break statements only appear inside loops",
+      "Return statements only appear inside functions",
     ],
   },
 ];
@@ -56,70 +160,149 @@ const featureSections = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Rímere programming language" />
-
+    <meta
+      name="description"
+      content="Rímere is a medieval-themed programming language inspired by Old English vocabulary and compiled to JavaScript."
+    />
     <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
     <link rel="icon" href={asset("favicon.ico")} />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&display=swap"
+      rel="stylesheet"
+    />
     <title>Rímere</title>
   </head>
-
   <body>
-    <main class="sheet">
-
-      <!-- HEADER -->
-      <header class="masthead">
-        <img src={asset("rimere-logo.png")} alt="Rímere logo" />
-        <h1>Rímere</h1>
-        <p>Computing for the Medieval World</p>
-      </header>
-
-      <!-- OVERVIEW -->
-      <section>
-        <h2>Overview</h2>
-        {overview.map(p => <p>{p}</p>)}
-      </section>
-
-      <!-- EXAMPLES -->
-      <section>
-        <h2>Examples</h2>
-        {examples.map(e => (
-          <div>
-            <h3>{e.title}</h3>
-            <pre>{e.code}</pre>
+    <main class="page-shell">
+      <section class="sheet hero-shell" id="top">
+        <header class="masthead">
+          <div class="crest-row">
+            <img
+              class="flourish-image flourish-image-left"
+              src={asset("left.png")}
+              alt=""
+              aria-hidden="true"
+            />
+            <div class="logo-box">
+              <img src={asset("rimere-logo.png")} alt="Rímere logo" />
+            </div>
+            <img
+              class="flourish-image flourish-image-right"
+              src={asset("right.png")}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
-        ))}
+
+          <p class="hero-kicker">Computing for the Medieval World</p>
+          <h1>Rímere</h1>
+          <p class="hero-copy">
+            A thematic programming language that turns compiler construction
+            into something closer to a manuscript than a machine panel.
+          </p>
+
+          <nav class="nav-row" aria-label="Primary">
+            {navLinks.map((link) => (
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </header>
       </section>
 
-      <!-- DEVELOPERS -->
-      <section>
-        <h2>Developers</h2>
-        {developers.map(dev => (
-          <div>
-            {dev.photo
-              ? <img src={asset(dev.photo)} alt={dev.name} />
-              : <span>{dev.initials}</span>}
-            <h3>{dev.name}</h3>
-            <p>{dev.bio}</p>
+      <section class="sheet content-section" id="story">
+        <div class="section-heading">
+          <p class="eyebrow">Overview</p>
+          <h2>The Language Story</h2>
+        </div>
+        <div class="story-grid">
+          <div class="story-copy">
+            {overview.map((paragraph) => <p>{paragraph}</p>)}
           </div>
-        ))}
-      </section>
-
-      <!-- FEATURES -->
-      <section>
-        <h2>Features</h2>
-        {featureSections.map(section => (
-          <div>
-            <h3>{section.title}</h3>
+          <aside class="story-panel">
+            <h3>At a Glance</h3>
             <ul>
-              {section.items.map(i => <li>{i}</li>)}
+              <li>Old English-inspired vocabulary</li>
+              <li>Compiled to JavaScript</li>
+              <li>Designed for readability and theme</li>
+              <li>Backed by parser, analyzer, optimizer, and generator stages</li>
             </ul>
-          </div>
-        ))}
+            <a class="repo-button" href={repoUrl} target="_blank" rel="noreferrer">
+              View the Compiler Repo
+            </a>
+          </aside>
+        </div>
       </section>
 
+      <section class="sheet content-section" id="examples">
+        <div class="section-heading">
+          <p class="eyebrow">Examples</p>
+          <h2>Sample Programs</h2>
+        </div>
+        <div class="example-grid">
+          {examples.map((example) => (
+            <article class="example-card">
+              <div class="card-heading">
+                <h3>{example.title}</h3>
+                <p class="card-subtitle">{example.file}</p>
+              </div>
+              <p class="card-detail">{example.detail}</p>
+              <pre><code>{example.code}</code></pre>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="sheet content-section" id="developers">
+        <div class="section-heading">
+          <p class="eyebrow">Developers</p>
+          <h2>The Authors Behind Rímere</h2>
+        </div>
+        <div class="developer-layout">
+          <div class="developer-list">
+            {developers.map((developer) => (
+              <article class="developer-row">
+                <div class="developer-mark">
+                  {developer.photo ? (
+                    <img src={asset(developer.photo)} alt={developer.name} />
+                  ) : (
+                    <span>{developer.initials}</span>
+                  )}
+                </div>
+                <div class="developer-copy">
+                  <h3>{developer.name}</h3>
+                  <p>{developer.bio}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <aside class="features-panel">
+            <div class="section-heading section-heading-compact">
+              <p class="eyebrow">Reference</p>
+              <h2>Language Notes</h2>
+            </div>
+            <div class="feature-sections">
+              {featureGroups.map((group) => (
+                <section class="feature-block">
+                  <h3>{group.title}</h3>
+                  <ul>
+                    {group.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </section>
     </main>
   </body>
 </html>
