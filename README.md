@@ -300,4 +300,4 @@ npm test
 
 ## Link to Website
 
-[Website](https://jordanchase.github.io/lmu-cmsi-3802-homework1/#developers)
+[Website](https://jordanchase.github.io/rimere/)
