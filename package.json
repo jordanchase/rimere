@@ -8,7 +8,7 @@
     "test": "c8 node --test",
     "start": "node src/rimere.js"
   },
-  "author": "Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney, Ray, Temi, Anastasia Buzovo ",
+  "author": "Jordan Chase, Marleena Limbrick, Vicente Anyaegbu, Audrey Whitney-Miller, Ray Clemons, Temi Iredale",
   "license": "MIT",
   "keywords": [
     "compiler",
