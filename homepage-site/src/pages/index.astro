@@ -1,15 +1,13 @@
 ---
 import "../styles/site.css";
 
-<<<<<<< HEAD
-const repoUrl = "https://github.com/jordanchase/rimere";
-=======
 const repoUrl = "https://github.com/jordanchase/lmu-cmsi-3802-homework1";
+
 const baseUrl = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
 const asset = (path) => `${baseUrl}${String(path).replace(/^\/+/, "")}`;
->>>>>>> d316301 (hopefully fixed images?)
 
 const overview = [
   "In an age before silicon-based screens, computation was the craft of scribes, scholars, and quiet thinkers. These were the people who transformed symbols into meaning. Rímere reimagines programming as it might have existed in that world: a language shaped not by modern syntax, but by the cadence and vocabulary of Old English.",
@@ -17,22 +15,9 @@ const overview = [
   "Rímere is not intended to be a perfectly reconstructed linguistic model of Old English. Instead, it is a thematic programming language that draws from Old English vocabulary and style while remaining readable, teachable, and implementable in a modern compiler project.",
 ];
 
-const navGroups = [
-  [
-    { href: "#story", label: "story" },
-    { href: "#examples", label: "examples" },
-  ],
-  [
-    { href: "#developers", label: "developers" },
-    { href: repoUrl, label: "repo", external: true },
-  ],
-];
-
 const examples = [
   {
     title: "Variables",
-    covers: "bindan, sprecan, numbers, strings, arithmetic, parentheses",
-    checks: "Arithmetic operations require numbers.",
     code: `bindan x as 5;
 bindan y as 10;
 sprecan (x + y) * 2;
@@ -40,8 +25,6 @@ sprecan "hātan grētan, Rímere!";`,
   },
   {
     title: "Logic",
-    covers: "gif, elles, soþ, na, and, or, >=",
-    checks: "If conditions must be boolean. Logical operations require booleans.",
     code: `bindan score as 7;
 bindan blessed as soþ;
 bindan feast as na;
@@ -51,108 +34,19 @@ elles:
   sprecan "wait by the wall";
 end`,
   },
-  {
-    title: "Functions",
-    covers: "ritan, with, cweðan, function calls, expression statements",
-    checks: "Function calls must use the correct number of arguments. Return statements only appear inside functions.",
-    code: `ritan add with a, b:
-  cweðan a + b;
-end
-
-add(1, 2);
-sprecan add(2, 3);`,
-  },
-  {
-    title: "For Loop",
-    covers: "foran, fram, to, ==, abrecan",
-    checks: "Break statements only appear inside loops. Loop bounds are numeric.",
-    code: `foran i fram 1 to 5:
-  gif i == 4:
-    abrecan;
-  end
-  sprecan i;
-end`,
-  },
-  {
-    title: "While and Lists",
-    covers: "hwil, <, list literals, wyrd",
-    checks: "While conditions must be boolean. List literals are valid expressions.",
-    code: `hwil 1 < 2:
-  sprecan [1, 2, 3];
-  abrecan;
-end
-
-sprecan "wyrd";`,
-  },
 ];
 
 const developers = [
-  {
-    initials: "JC",
-    name: "Jordan Chase",
-    photo: `${import.meta.env.BASE_URL}jordanphoto.png`,
-    bio: "Loyola Marymount University '27",
-  },
-  {
-    initials: "ML",
-    name: "Marleena Limbrick",
-    photo: `${import.meta.env.BASE_URL}marleenaphoto.png`,
-    bio: "Loyola Marymount University '27",
-  },
-  {
-    initials: "VA",
-    name: "Vicente Anyaegbu",
-    bio: "Loyola Marymount University '27",
-  },
-  {
-    initials: "AW",
-    name: "Audrey Whitney-Miller",
-    photo: `${import.meta.env.BASE_URL}audreyphoto.jpeg`,
-    bio: "Loyola Marymount University '27",
-  },
-  {
-    initials: "R",
-    name: "Ray Clemons",
-    bio: "Loyola Marymount University '27",
-  },
-  {
-    initials: "T",
-    name: "Temi Iredale",
-    bio: "Loyola Marymount University '26",
-  },
+  { initials: "JC", name: "Jordan Chase", photo: "jordanphoto.png", bio: "LMU '27" },
+  { initials: "AW", name: "Audrey Whitney-Miller", photo: "audreyphoto.jpeg", bio: "LMU '27" },
 ];
 
 const featureSections = [
   {
-    title: "Keywords",
-    items: [
-      "bindan binds a value",
-      "sprecan prints a result",
-      "cweðan returns from a function",
-      "gif and elles form a conditional",
-      "foran and hwil form loops",
-    ],
-  },
-  {
     title: "Features",
     items: [
-      "Readable, narrative-style code",
-      "Variable binding, arithmetic expressions, conditionals, loops, and functions",
-      "Booleans, numbers, and strings",
-      "A minimal punctuation philosophy",
-    ],
-  },
-  {
-    title: "Static Semantics",
-    items: [
-      "Variables must be declared before use",
-      "Variables cannot be redeclared in the same scope",
-      "Function calls must use the correct number of arguments",
-      "Arithmetic operations require numbers",
-      "Logical operations require booleans",
-      "If and while conditions must be boolean",
-      "Break statements only appear inside loops",
-      "Return statements only appear inside functions",
+      "Readable narrative-style code",
+      "Variables, loops, conditionals, functions",
     ],
   },
 ];
@@ -162,135 +56,70 @@ const featureSections = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Rímere is a thematic programming language inspired by Old English vocabulary and compiler design."
-    />
+    <meta name="description" content="Rímere programming language" />
+
     <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
     <link rel="icon" href={asset("favicon.ico")} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&display=swap"
-      rel="stylesheet"
-    />
+
     <title>Rímere</title>
   </head>
+
   <body>
     <main class="sheet">
-      <header class="masthead" id="top">
-        <div class="crest-row">
-          <img
-            class="flourish-image flourish-image-left"
-<<<<<<< HEAD
-            src={`${import.meta.env.BASE_URL}left.png`}
-=======
-            src={asset("left.png")}
->>>>>>> d316301 (hopefully fixed images?)
-            alt=""
-            aria-hidden="true"
-            style="width: 50%; max-height: 105px;"
-          />
-          <div class="logo-box">
-<<<<<<< HEAD
-            <img src={`${import.meta.env.BASE_URL}rimere-logo.png`} alt="Rímere logo" />
-          </div>
-          <img
-            class="flourish-image flourish-image-right"
-            src={`${import.meta.env.BASE_URL}right.png`}
-=======
-            <img src={asset("rimere-logo.png")} alt="Rímere logo" />
-          </div>
-          <img
-            class="flourish-image flourish-image-right"
-            src={asset("right.png")}
->>>>>>> d316301 (hopefully fixed images?)
-            alt=""
-            aria-hidden="true"
-            style="width: 50%; max-height: 105px;"
-          />
-        </div>
 
+      <!-- HEADER -->
+      <header class="masthead">
+        <img src={asset("rimere-logo.png")} alt="Rímere logo" />
         <h1>Rímere</h1>
-        <p class="tagline">Computing for the Medieval World!</p>
-
-        <nav class="nav-row" aria-label="Primary">
-          {navGroups.map((group, index) => (
-            <div class={`nav-group ${index === 1 ? "nav-group-right" : ""}`}>
-              {group.map((link) => (
-                <a
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noreferrer" : undefined}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ))}
-        </nav>
+        <p>Computing for the Medieval World</p>
       </header>
 
-      <section class="section story-section" id="story">
+      <!-- OVERVIEW -->
+      <section>
         <h2>Overview</h2>
-        <div class="overview-copy">
-          {overview.map((paragraph) => <p>{paragraph}</p>)}
-        </div>
+        {overview.map(p => <p>{p}</p>)}
       </section>
 
-      <section class="section" id="examples">
-        <h2>Example Programs</h2>
-        <div class="example-grid">
-          {examples.map((example) => (
-            <article class="example-card">
-              <h3>{example.title}</h3>
-              <pre><code>{example.code}</code></pre>
-              <div class="example-meta">
-                <p><span>Covers</span>{example.covers}</p>
-                <p><span>Checks</span>{example.checks}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section class="section lower-section" id="developers">
-        <div class="developer-column">
-          <h2>Developers</h2>
-          <div class="developer-list">
-            {developers.map((developer) => (
-              <article class="developer-row">
-                <div class="developer-mark">
-                  {developer.photo ? (
-                    <img src={asset(developer.photo)} alt={developer.name} />
-                  ) : (
-                    developer.initials
-                  )}
-                </div>
-                <div class="developer-copy">
-                  <h3>{developer.name}</h3>
-                  <p>{developer.bio}</p>
-                </div>
-              </article>
-            ))}
+      <!-- EXAMPLES -->
+      <section>
+        <h2>Examples</h2>
+        {examples.map(e => (
+          <div>
+            <h3>{e.title}</h3>
+            <pre>{e.code}</pre>
           </div>
-        </div>
-
-        <aside class="features-panel">
-          <h2>Features</h2>
-          <div class="feature-sections">
-            {featureSections.map((section) => (
-              <section class="feature-block">
-                <h3>{section.title}</h3>
-                <ul>
-                  {section.items.map((item) => <li>{item}</li>)}
-                </ul>
-              </section>
-            ))}
-          </div>
-        </aside>
+        ))}
       </section>
+
+      <!-- DEVELOPERS -->
+      <section>
+        <h2>Developers</h2>
+        {developers.map(dev => (
+          <div>
+            {dev.photo
+              ? <img src={asset(dev.photo)} alt={dev.name} />
+              : <span>{dev.initials}</span>}
+            <h3>{dev.name}</h3>
+            <p>{dev.bio}</p>
+          </div>
+        ))}
+      </section>
+
+      <!-- FEATURES -->
+      <section>
+        <h2>Features</h2>
+        {featureSections.map(section => (
+          <div>
+            <h3>{section.title}</h3>
+            <ul>
+              {section.items.map(i => <li>{i}</li>)}
+            </ul>
+          </div>
+        ))}
+      </section>
+
     </main>
   </body>
 </html>
