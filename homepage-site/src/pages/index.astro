@@ -82,13 +82,13 @@ const developers = [
   {
     initials: "JC",
     name: "Jordan Chase",
-    photo: "rimere/jordanphoto.png",
+    photo: "${import.meta.env.BASE_URL}jordanphoto.png",
     bio: "Loyola Marymount University '27",
   },
   {
     initials: "ML",
     name: "Marleena Limbrick",
-    photo: "rimere/marleenaphoto.png",
+    photo: "${import.meta.env.BASE_URL}marleenaphoto.png",
     bio: "Loyola Marymount University '27",
   },
   {
@@ -99,7 +99,7 @@ const developers = [
   {
     initials: "AW",
     name: "Audrey Whitney-Miller",
-    photo: "rimere/audreyphoto.jpeg",
+    photo: "${import.meta.env.BASE_URL}audreyphoto.jpeg",
     bio: "Loyola Marymount University '27",
   },
   {
@@ -175,17 +175,17 @@ const featureSections = [
         <div class="crest-row">
           <img
             class="flourish-image flourish-image-left"
-            src="/left.png"
+            src={`${import.meta.env.BASE_URL}left.png`}
             alt=""
             aria-hidden="true"
             style="width: 50%; max-height: 105px;"
           />
           <div class="logo-box">
-            <img src="/rimere-logo.png" alt="Rímere logo" />
+            <img src={`${import.meta.env.BASE_URL}rimere-logo.png`} alt="Rímere logo" />
           </div>
           <img
             class="flourish-image flourish-image-right"
-            src="/right.png"
+            src={`${import.meta.env.BASE_URL}right.png`}
             alt=""
             aria-hidden="true"
             style="width: 50%; max-height: 105px;"
