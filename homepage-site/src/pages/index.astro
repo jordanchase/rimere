@@ -1,7 +1,15 @@
 ---
 import "../styles/site.css";
 
+<<<<<<< HEAD
 const repoUrl = "https://github.com/jordanchase/rimere";
+=======
+const repoUrl = "https://github.com/jordanchase/lmu-cmsi-3802-homework1";
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const asset = (path) => `${baseUrl}${String(path).replace(/^\/+/, "")}`;
+>>>>>>> d316301 (hopefully fixed images?)
 
 const overview = [
   "In an age before silicon-based screens, computation was the craft of scribes, scholars, and quiet thinkers. These were the people who transformed symbols into meaning. Rímere reimagines programming as it might have existed in that world: a language shaped not by modern syntax, but by the cadence and vocabulary of Old English.",
@@ -159,8 +167,8 @@ const featureSections = [
       name="description"
       content="Rímere is a thematic programming language inspired by Old English vocabulary and compiler design."
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
+    <link rel="icon" href={asset("favicon.ico")} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -175,17 +183,29 @@ const featureSections = [
         <div class="crest-row">
           <img
             class="flourish-image flourish-image-left"
+<<<<<<< HEAD
             src={`${import.meta.env.BASE_URL}left.png`}
+=======
+            src={asset("left.png")}
+>>>>>>> d316301 (hopefully fixed images?)
             alt=""
             aria-hidden="true"
             style="width: 50%; max-height: 105px;"
           />
           <div class="logo-box">
+<<<<<<< HEAD
             <img src={`${import.meta.env.BASE_URL}rimere-logo.png`} alt="Rímere logo" />
           </div>
           <img
             class="flourish-image flourish-image-right"
             src={`${import.meta.env.BASE_URL}right.png`}
+=======
+            <img src={asset("rimere-logo.png")} alt="Rímere logo" />
+          </div>
+          <img
+            class="flourish-image flourish-image-right"
+            src={asset("right.png")}
+>>>>>>> d316301 (hopefully fixed images?)
             alt=""
             aria-hidden="true"
             style="width: 50%; max-height: 105px;"
@@ -243,7 +263,7 @@ const featureSections = [
               <article class="developer-row">
                 <div class="developer-mark">
                   {developer.photo ? (
-                    <img src={developer.photo} alt={developer.name} />
+                    <img src={asset(developer.photo)} alt={developer.name} />
                   ) : (
                     developer.initials
                   )}
